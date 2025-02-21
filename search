@@ -1,0 +1,4 @@
+http://www.naderabsy.netlify.app.com/* https://naderabsy.netlify.app.com/:splat 301!
+User-agent: *
+Allow: /
+Sitemap: https://yourwebsite.netlify.app/sitemap.xml
