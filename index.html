@@ -251,11 +251,10 @@
           </p>
           <p>
             Alongside that I am the sole developer and administrator for seven
-            <strong>IEEE-affiliated academic conference websites</strong>. It is the part of my work with the
-            sharpest feedback loop: when an author emails to say they cannot register for a conference, there
-            is no ambiguity about whether something is broken. That role has had me closing a public exposure
-            of database credentials, recovering a site that was publishing another conference's programme to
-            its own authors, and verifying colour contrast programmatically rather than trusting my eye.
+            <strong>IEEE-affiliated academic conference websites</strong>, covering everything from the server
+            up to the page. It is the part of my work with the sharpest feedback loop: when an author emails
+            to say they cannot register for a conference, there is no ambiguity about whether something is
+            broken.
           </p>
 
           <p>
@@ -304,41 +303,21 @@
             <p class="org">Freelance <span class="sep">·</span> IEEE-affiliated academic conferences <span class="sep">·</span> Remote</p>
             <p class="period"><time datetime="2026-04">April 2026</time> — Present</p>
           </div>
-
-          <p class="role-summary">
-            Sole developer and administrator for seven conference and workshop websites across five domains —
-            covering server administration, front-end development, accessibility compliance and author-facing
-            incident response.
-          </p>
-
-          <ul class="stat-row">
-            <li><strong>7</strong><span>sites maintained</span></li>
-            <li><strong>~12 GB</strong><span>exposed data secured</span></li>
-            <li><strong>98.7%</strong><span>dead site weight removed</span></li>
-            <li><strong>WCAG AA</strong><span>verified light &amp; dark</span></li>
-          </ul>
-
           <ul class="bullets">
-            <li><strong>Closed a public data exposure</strong> in which 25 site archives — roughly 12&nbsp;GB, including WordPress configuration files carrying live database credentials — were downloadable by direct URL. Moved every archive outside the web root, confirmed each returned 404, established the database accepted local connections only, and rotated authentication salts regardless.</li>
-            <li><strong>Recovered a site publishing another conference's information to its authors.</strong> After an author reported being unable to register, audited all 14 pages of iEDGE 2026 and resolved 23 content and link defects inherited from the template it had been copied from — a venue page advertising the wrong university, a programme carrying a different event's schedule and session chairs, and a proceedings page listing another conference's papers behind broken downloads.</li>
-            <li><strong>Corrected the IEEE PDF eXpress conference identifier</strong> from another conference's 67013X to the correct 72300X — the value determining which proceedings an accepted paper is published under.</li>
-            <li>Traced a registration failure to a payment portal listing no matching event, leaving authors unable to complete registration before the deadline; repointed both affected pages and added wording removing the ambiguity that prompted the report.</li>
-            <li>Reduced one site from 312&nbsp;MB to 4.2&nbsp;MB by removing unreferenced legacy content — verifying beforehand that none was linked, and afterwards that all 34 remaining links resolved. Consolidated three divergent copies into one canonical version with permanent redirects preserving inbound links.</li>
-            <li>Established a caching policy across six sites — HTML uncached so editorial changes appear immediately, static assets cached for a week — after diagnosing a two-hour HTML cache that had been hiding published edits from visitors while showing them to their authors.</li>
-            <li>Brought new and edited pages to <strong>WCAG 2.1 AA</strong> contrast, verified programmatically in both themes rather than by eye (minimum 4.76:1 light, 4.99:1 dark). Rebuilt a scrolling sponsor strip so visitors with reduced motion enabled see all 14 logos as a static grid instead of the six the halted animation left them.</li>
-            <li>Implemented per-page document titles across 16 pages that had been displaying a different conference's name in browser tabs, bookmarks and shared links; built programme, workshop and online-attendance pages from source documents to each site's existing design system.</li>
-            <li>Reorganised server directories from auto-generated names to domain-named structure using symlink bridges to avoid downtime, and administered the estate over key-based SSH and cPanel with pre-change backups and rollback discipline.</li>
+            <li>Sole developer and administrator for seven academic conference and workshop websites across five domains.</li>
+            <li>Handle server administration, deployment and hosting across Linux, cPanel, Apache and SSH, with backups and verification before every change.</li>
+            <li>Build and maintain pages to each site's existing design system, and bring new and edited pages up to WCAG 2.1 AA accessibility.</li>
+            <li>Act as first response for author-facing issues — registration, content and link defects — working to conference deadlines that cannot move.</li>
+            <li>Audit sites for accuracy and security, resolving inherited defects and keeping content correct ahead of publication.</li>
           </ul>
-
           <p class="portfolio-label">Sites maintained</p>
-          <ul class="portfolio-list">
-            <li><a href="https://flta-conference.org" rel="noopener" target="_blank">FLTA 2026</a> — Federated Learning Technologies &amp; Applications</li>
-            <li><a href="https://agcs-conference.tech" rel="noopener" target="_blank">AGCS 2026</a> — Agentic, Generative &amp; Cognitive AI Systems</li>
-            <li><a href="https://cqcs-conference.net" rel="noopener" target="_blank">CQCS 2026</a> — Quantum Computing &amp; Communications Systems</li>
-            <li>iEDGE 2026 — Edge Intelligence &amp; Decentralized AI <span class="muted">(co-located with AGCS)</span></li>
-            <li>FedSecAI 2026 &amp; Agentic and Federated AI <span class="muted">(co-located workshops)</span></li>
-            <li><a href="https://school.flta-conference.org" rel="noopener" target="_blank">Federated Learning Summer School</a> &amp; Falcon 2027</li>
-          </ul>
+          <p class="portfolio-inline">
+            <a href="https://flta-conference.org" rel="noopener" target="_blank">FLTA 2026</a> <span class="sep">·</span>
+            <a href="https://agcs-conference.tech" rel="noopener" target="_blank">AGCS 2026</a> <span class="sep">·</span>
+            <a href="https://cqcs-conference.net" rel="noopener" target="_blank">CQCS 2026</a> <span class="sep">·</span>
+            iEDGE 2026 <span class="sep">·</span> FedSecAI 2026 <span class="sep">·</span>
+            <a href="https://school.flta-conference.org" rel="noopener" target="_blank">Federated Learning Summer School</a>
+          </p>
         </li>
 
         <li class="timeline-item reveal">
@@ -394,7 +373,7 @@
             <li>UAT</li><li>Test Case Design</li><li>Test Planning &amp; Tracking</li>
             <li>Defect Management</li><li>Root Cause Analysis</li>
             <li>API &amp; Integration Testing</li><li>Regulatory / Compliance Testing</li>
-            <li>WCAG 2.1 AA</li><li>Link &amp; Content Auditing</li><li>Defect Triage</li>
+            <li>WCAG 2.1 AA</li><li>Defect Triage</li>
           </ul>
         </div>
         <div class="skill-card reveal">
@@ -416,9 +395,8 @@
           <h3>Web &amp; Operations</h3>
           <ul class="tags">
             <li>Linux Shared Hosting</li><li>cPanel</li><li>Bluehost</li>
-            <li>Apache / .htaccess</li><li>mod_rewrite</li><li>mod_expires</li>
-            <li>SSH Key Authentication</li><li>DNS &amp; Document Roots</li>
-            <li>WordPress</li><li>Caching Policy</li><li>Backup &amp; Rollback Discipline</li>
+            <li>Apache / .htaccess</li><li>SSH</li><li>DNS</li>
+            <li>WordPress</li><li>Deployment &amp; Backups</li>
           </ul>
         </div>
       </div>
