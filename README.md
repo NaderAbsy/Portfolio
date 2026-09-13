@@ -1,6 +1,8 @@
 # Portfolio
 
-My personal site — **[naderabsy.com](https://naderabsy.com)**
+**Live: [naderabsy.com](https://naderabsy.com)**
+
+My personal site.
 
 A static, dependency-free portfolio: hand-written HTML, CSS and JavaScript, no framework
 and no build step.
