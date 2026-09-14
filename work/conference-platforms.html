@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Running seven academic conference sites — Case study | Nader Absy</title>
+<meta name="description" content="How I took over seven IEEE-affiliated conference and workshop websites as sole developer and administrator: what I inherited, what I changed, and what held up against deadlines that could not move.">
+<link rel="canonical" href="https://naderabsy.com/work/conference-platforms.html">
+<meta name="author" content="Nader Absy">
+<meta property="og:title" content="Running seven academic conference sites — Case study">
+<meta property="og:description" content="Taking over seven IEEE-affiliated conference websites as sole developer and administrator.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://naderabsy.com/work/conference-platforms.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .cs-wrap { width: min(100% - 2.5rem, 760px); margin: 0 auto; }
+  .cs-head { padding: clamp(2.5rem, 6vw, 4.5rem) 0 1.5rem; }
+  .cs-back { display: inline-flex; align-items: center; gap: .4rem; font-size: var(--step--1);
+             color: var(--text-muted); text-decoration: none; margin-bottom: 1.5rem; }
+  .cs-back:hover { color: var(--accent-text); }
+  .cs-head h1 { font-size: var(--step-3); line-height: 1.12; letter-spacing: -.02em; margin: 0 0 .8rem; }
+  .cs-sub { color: var(--text-muted); font-size: var(--step-1); line-height: 1.5; margin: 0 0 1.2rem; }
+  .cs-meta { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; font-size: var(--step--1);
+             color: var(--text-muted); border-top: 1px solid var(--border);
+             border-bottom: 1px solid var(--border); padding: .9rem 0; }
+  .cs-meta b { color: var(--text); font-weight: 600; }
+  .cs-body { padding-bottom: 4rem; }
+  .cs-body h2 { font-size: var(--step-2); letter-spacing: -.015em; margin: 2.6rem 0 .9rem; }
+  .cs-body h3 { font-size: var(--step-1); margin: 1.8rem 0 .5rem; }
+  .cs-body p { margin: 0 0 1.05rem; line-height: 1.72; }
+  .cs-body ul { margin: 0 0 1.05rem; padding-left: 1.15rem; }
+  .cs-body li { margin-bottom: .5rem; line-height: 1.68; }
+  .cs-callout { background: var(--surface-2); border-left: 3px solid var(--accent);
+                border-radius: 0 var(--radius) var(--radius) 0; padding: 1.1rem 1.3rem; margin: 1.6rem 0; }
+  .cs-callout p { margin: 0; }
+  .cs-sites { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+  .cs-sites li { margin: 0; }
+  .cs-sites a, .cs-sites span { display: inline-block; padding: .35rem .75rem; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface); font-size: var(--step--1);
+      text-decoration: none; color: var(--text); }
+  .cs-sites a:hover { border-color: var(--accent); color: var(--accent-text); }
+  .cs-foot { border-top: 1px solid var(--border); padding: 1.6rem 0 3rem;
+             font-size: var(--step--1); color: var(--text-muted); }
+  .cs-foot a { color: var(--accent-text); }
+</style>
+</head>
+<body>
+
+<main class="cs-wrap">
+
+  <header class="cs-head">
+    <a class="cs-back" href="../">← Back to naderabsy.com</a>
+    <h1>Running seven academic conference sites</h1>
+    <p class="cs-sub">Sole developer and administrator for seven IEEE-affiliated conference and workshop
+       websites, on deadlines set by other people and not movable by me.</p>
+    <div class="cs-meta">
+      <span><b>Role</b> Developer &amp; site administrator</span>
+      <span><b>Since</b> April 2026</span>
+      <span><b>Scope</b> 7 sites, 5 domains</span>
+    </div>
+  </header>
+
+  <article class="cs-body">
+
+    <h2>The situation</h2>
+    <p>
+      Academic conference websites are strange things to maintain. They are public-facing for a few
+      intense months, they carry information authors depend on to submit and register, and the dates
+      on them are immovable — a submission deadline cannot slip because a page is broken. Between
+      cycles they sit largely untouched, which is how they accumulate problems.
+    </p>
+    <p>
+      I took over seven of them across five domains, each built at a different time by different
+      people, with no shared stack, no documentation and no handover. They run on ordinary shared
+      hosting — Linux, cPanel, Apache, SSH — rather than anything with a deployment pipeline.
+    </p>
+
+    <h2>What I inherited</h2>
+    <p>
+      The first job was working out what was actually there, which took longer than fixing most of it.
+      Broadly, the problems fell into four groups:
+    </p>
+    <ul>
+      <li><strong>Correctness.</strong> Dates, committee listings and submission instructions that had
+          drifted out of step with what organisers were telling authors elsewhere.</li>
+      <li><strong>Accessibility.</strong> Pages that were unusable with a keyboard or a screen reader —
+          a genuine problem for a conference audience, and one that most visitors never report.</li>
+      <li><strong>Accumulated weight.</strong> Years of superseded files still being served, slowing
+          sites down and making it hard to tell what was current.</li>
+      <li><strong>Security and exposure.</strong> Inherited configuration that needed auditing and
+          tightening.</li>
+    </ul>
+
+    <h2>How I approached it</h2>
+
+    <h3>Correctness before everything else</h3>
+    <p>
+      A slow page irritates people; a wrong deadline costs someone a submission. I worked outward from
+      the pages authors actually act on — dates, submission instructions, registration — and only then
+      to everything else. Anything that could send an author down the wrong path got fixed first.
+    </p>
+
+    <h3>Back up, change, verify — every time</h3>
+    <p>
+      With no staging environments and no rollback, the discipline had to come from process instead.
+      Every change is preceded by a backup and followed by verification of the live result. It is not
+      sophisticated, but it is the difference between a bad edit being an inconvenience and it being
+      an incident during a submission week.
+    </p>
+
+    <div class="cs-callout">
+      <p><strong>The constraint that shaped everything:</strong> there is no maintenance window. A
+      conference site is busiest exactly when its deadlines approach, which is also when it is least
+      forgiving of mistakes. Every decision was made with that in mind.</p>
+    </div>
+
+    <h3>Accessibility as part of the work, not a project</h3>
+    <p>
+      Rather than treating accessibility as a separate remediation effort that would never get
+      scheduled, new and edited pages are brought up to WCAG 2.1 AA as they are touched. The estate
+      improves steadily without anyone having to approve an accessibility initiative.
+    </p>
+
+    <h3>Matching the house style</h3>
+    <p>
+      Each site has its own established design. New pages are built to the existing system rather
+      than to my preferences — a conference site should look like itself, and a visitor should not be
+      able to tell which pages I built.
+    </p>
+
+    <h2>What changed</h2>
+    <ul>
+      <li>Author-facing information is accurate and verified ahead of publication, not corrected after
+          someone complains.</li>
+      <li>New and revised pages meet WCAG 2.1 AA, so the estate improves with every cycle instead of
+          degrading.</li>
+      <li>Sites load faster, with superseded material no longer served.</li>
+      <li>Inherited security and configuration issues have been audited and addressed.</li>
+      <li>There is now a single point of contact who knows all seven sites, which is the part
+          organisers actually notice.</li>
+    </ul>
+
+    <h2>What I would do differently</h2>
+    <p>
+      I would have written the inventory down sooner. I spent the first weeks rediscovering the same
+      facts about which site did what, and a plain list of hosts, stacks and quirks would have paid
+      for itself within days. I would also have pushed earlier for a staging copy of at least the
+      busiest site; the back-up-and-verify discipline works, but it is a substitute for an environment
+      I should have asked for.
+    </p>
+
+    <h2>The sites</h2>
+    <ul class="cs-sites">
+      <li><a href="https://flta-conference.org" rel="noopener" target="_blank">FLTA 2026</a></li>
+      <li><a href="https://agcs-conference.tech" rel="noopener" target="_blank">AGCS 2026</a></li>
+      <li><a href="https://cqcs-conference.net" rel="noopener" target="_blank">CQCS 2026</a></li>
+      <li><span>iEDGE 2026</span></li>
+      <li><span>FedSecAI 2026</span></li>
+      <li><a href="https://school.flta-conference.org" rel="noopener" target="_blank">Federated Learning Summer School</a></li>
+    </ul>
+
+  </article>
+
+  <footer class="cs-foot">
+    <p>Written by <a href="../">Nader Absy</a> · <a href="../#contact">Get in touch</a></p>
+  </footer>
+
+</main>
+
+</body>
+</html>
