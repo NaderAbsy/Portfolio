@@ -245,7 +245,7 @@
     document.addEventListener('mouseout', function (e) { if (!e.relatedTarget) root.classList.remove('cursor-on'); });
   }
 
-  /* ---------- scroll-driven: progress, timeline, parallax, marquee speed ---------- */
+  /* ---------- scroll-driven: progress, timeline, parallax ---------- */
   var bar = document.querySelector('.scroll-progress');
   var timeline = document.querySelector('.timeline');
   var tlItems = timeline ? Array.from(timeline.querySelectorAll('.timeline-item')) : [];
@@ -258,10 +258,8 @@
   }
   var aboutImg = document.querySelector('.about-photo img');
   var aurora = document.querySelector('.hero-aurora');
-  var marquee = document.querySelector('.marquee-track');
-  var marqueeAnim = marquee && marquee.getAnimations ? marquee.getAnimations()[0] : null;
 
-  var lastY = window.scrollY, speed = 1, scheduled = false;
+  var scheduled = false;
   var onScroll = function () {
     scheduled = false;
     var y = window.scrollY, vh = window.innerHeight;
@@ -287,20 +285,6 @@
     }
 
     if (aurora && y < vh * 1.5) aurora.style.setProperty('--hero-shift', (y * .35).toFixed(1) + 'px');
-
-    // marquee runs faster the harder you scroll, then eases back
-    var v = Math.abs(y - lastY); lastY = y;
-    if (marqueeAnim && v > 2) {
-      speed = Math.max(speed, 1 + Math.min(v / 12, 5));
-      if (!easing) { easing = true; requestAnimationFrame(ease); }
-    }
-  };
-  var easing = false;
-  var ease = function () {
-    speed = lerp(speed, 1, .05);
-    if (Math.abs(speed - 1) < .01) { speed = 1; easing = false; }
-    marqueeAnim.playbackRate = speed;
-    if (easing) requestAnimationFrame(ease);
   };
   window.addEventListener('scroll', function () {
     if (!scheduled) { scheduled = true; requestAnimationFrame(onScroll); }

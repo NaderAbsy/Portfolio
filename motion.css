@@ -203,27 +203,6 @@ html:not([data-motion]) .scroll-progress { display: none; }
   transform: scale(1.14) translate3d(0, var(--par, 0px), 0);
 }
 
-/* ---------- marquee ---------- */
-
-.marquee { display: none; }
-[data-motion] .marquee {
-  display: block; overflow: hidden; border-block: 1px solid var(--border);
-  background: var(--bg-alt); padding: 1.1rem 0; user-select: none;
-  -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-          mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-.marquee-track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
-.marquee-track span {
-  display: inline-flex; align-items: center; gap: 2.2rem; padding-right: 2.2rem;
-  font-size: var(--step-1); font-weight: 600; letter-spacing: -.01em; white-space: nowrap; color: var(--text-muted);
-}
-.marquee-track span::after { content: "✦"; font-size: .7em; color: var(--accent); }
-/* even, not 3n: the list is two copies of ten, and the pattern must repeat at the seam */
-.marquee-track span:nth-child(even) {
-  color: transparent; -webkit-text-stroke: 1px var(--text-muted);
-}
-@keyframes marquee { to { transform: translateX(-50%); } }
-
 /* ---------- cursor follower (fine pointers only) ---------- */
 
 .cursor-ring, .cursor-dot {
@@ -248,5 +227,5 @@ html:not([data-motion]) .scroll-progress { display: none; }
 ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 
 @media print {
-  .scroll-progress, .hero-canvas, .hero-aurora, .marquee, .cursor-ring, .cursor-dot { display: none !important; }
+  .scroll-progress, .hero-canvas, .hero-aurora, .cursor-ring, .cursor-dot { display: none !important; }
 }
