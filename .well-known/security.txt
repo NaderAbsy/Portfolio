@@ -1,0 +1,4 @@
+Contact: mailto:naderabsy@hotmail.com
+Expires: 2027-09-30T00:00:00.000Z
+Preferred-Languages: en, ar
+Canonical: https://naderabsy.com/.well-known/security.txt

@@ -22,7 +22,11 @@
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
     # Limit cross-origin resource sharing of this document
     Cross-Origin-Opener-Policy = "same-origin"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.clarity.ms https://scripts.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.clarity.ms; connect-src 'self' https://*.clarity.ms; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    # Inline scripts are allowed by hash, not 'unsafe-inline', so an injected <script> can't run.
+    # The two hashes are the theme bootstrap and the Clarity loader in index.html; if either
+    # script's text changes by even a byte, recompute its hash or it will be blocked:
+    #   python3 -c "import hashlib,base64,sys;print(base64.b64encode(hashlib.sha256(sys.stdin.read().encode()).digest()).decode())"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-MImpG0/o6JDrl/FAMBSMgCO8xCxVu9LsXWS7k3uby9c=' 'sha256-/rPqCYyQuDjwKPs9/Ld7dufr3Kw58NRgwBFTZlqKu4g=' https://www.clarity.ms https://scripts.clarity.ms; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.clarity.ms; connect-src 'self' https://*.clarity.ms; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
 
 [[headers]]
   for = "/assets/*"
