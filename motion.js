@@ -165,19 +165,32 @@
     setRunning();
   }
 
-  /* ---------- hero photo tilts toward the pointer ---------- */
-  var photo = document.querySelector('.hero-photo img');
-  if (photo && finePointer && hero) {
-    hero.addEventListener('pointermove', function (e) {
-      var r = photo.getBoundingClientRect();
-      var x = (e.clientX - (r.left + r.width / 2)) / window.innerWidth;
-      var y = (e.clientY - (r.top + r.height / 2)) / window.innerHeight;
-      photo.style.setProperty('--rx', clamp(x * 30, -14, 14) + 'deg');
-      photo.style.setProperty('--ry', clamp(-y * 30, -14, 14) + 'deg');
-    });
-    hero.addEventListener('pointerleave', function () {
-      photo.style.setProperty('--rx', '0deg'); photo.style.setProperty('--ry', '0deg');
-    });
+  /* ---------- the name reacts to the pointer ---------- */
+  var name = document.querySelector('.hero h1');
+  if (name && hero) {
+    var chars = Array.from(name.querySelectorAll('.ch'));
+    var last = chars.length ? parseFloat(chars[chars.length - 1].style.getPropertyValue('--c')) : 0;
+    // entrance: 150ms + c*45ms delay, 1s duration
+    setTimeout(function () { name.classList.add('settled'); }, 150 + last * 45 + 1100);
+
+    var nraf = 0, nev = null;
+    var wave = function () {
+      nraf = 0;
+      if (!name.classList.contains('settled')) return;
+      chars.forEach(function (ch) {
+        var r = ch.getBoundingClientRect();
+        var dx = nev ? nev.clientX - (r.left + r.width / 2) : 9999;
+        var dy = nev ? nev.clientY - (r.top + r.height / 2) : 9999;
+        var d = Math.sqrt(dx * dx + dy * dy);
+        var k = Math.max(0, 1 - d / 260);    // 1 under the pointer, 0 beyond 260px
+        k = k * k * (3 - 2 * k);              // smoothstep, so the wave has soft edges
+        ch.style.setProperty('--lift', (-k * 0.14 * r.height).toFixed(1) + 'px');
+        ch.style.setProperty('--grow', (1 + k * .12).toFixed(3));
+        ch.style.setProperty('--tilt', (clamp(-dx / 40, -1, 1) * k * -8).toFixed(2) + 'deg');
+      });
+    };
+    hero.addEventListener('pointermove', function (e) { nev = e; if (!nraf) nraf = requestAnimationFrame(wave); });
+    hero.addEventListener('pointerleave', function () { nev = null; if (!nraf) nraf = requestAnimationFrame(wave); });
   }
 
   /* ---------- card tilt + spotlight ---------- */

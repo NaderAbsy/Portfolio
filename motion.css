@@ -40,28 +40,6 @@ html:not([data-motion]) .scroll-progress { display: none; }
 @keyframes drift-b { to { transform: translate(20vmax, -10vmax) scale(.85); } }
 @keyframes drift-c { to { transform: translate(-12vmax, -16vmax) scale(1.15); } }
 
-/* ---------- hero photo: spinning ring, glow, float ---------- */
-
-[data-motion] .hero-photo { position: relative; animation: float 7s ease-in-out infinite; }
-[data-motion] .hero-photo::before,
-[data-motion] .hero-photo::after {
-  content: ""; position: absolute; inset: -10px; border-radius: 50%; z-index: -1;
-  background: conic-gradient(from 0deg, var(--accent), #a970ff, #ff6fb5, #ffb86b, var(--accent));
-  animation: spin 9s linear infinite;
-}
-[data-motion] .hero-photo::before {
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
-          mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
-}
-[data-motion] .hero-photo::after { inset: 4%; filter: blur(38px); opacity: .55; z-index: -2; }
-[data-motion] .hero-photo img {
-  transform: perspective(800px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg));
-  transition: transform .5s cubic-bezier(.2, .8, .2, 1);
-}
-
-@keyframes spin  { to { transform: rotate(1turn); } }
-@keyframes float { 50% { transform: translateY(-12px); } }
-
 /* ---------- split headings ---------- */
 
 .split .w  { display: inline-block; overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; vertical-align: top; }
@@ -86,6 +64,15 @@ html:not([data-motion]) .scroll-progress { display: none; }
   animation-delay: calc(1.6s + var(--c) * 60ms);
 }
 @keyframes sheen { 0%, 60% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+
+/* Once the entrance has played, letters respond to the pointer: they lift
+   and swell as it passes, like a wave running through the name. */
+[data-motion] .hero h1.settled .w { overflow: visible; }
+[data-motion] .hero h1.settled .ch {
+  transform: translateY(var(--lift, 0px)) scale(var(--grow, 1)) rotate(var(--tilt, 0deg));
+  transition: transform .35s cubic-bezier(.2, .9, .3, 1.4); transition-delay: 0s;
+  transform-origin: 50% 90%;
+}
 
 [data-motion] .hero .accent {
   background: linear-gradient(90deg, var(--accent), #a970ff, #ff6fb5, var(--accent));
