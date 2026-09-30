@@ -19,9 +19,23 @@
   if (toggle) {
     toggle.addEventListener('click', function () {
       var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      syncToggle(next);
+      var apply = function () {
+        document.documentElement.setAttribute('data-theme', next);
+        syncToggle(next);
+      };
       try { localStorage.setItem('theme', next); } catch (e) { /* private mode */ }
+
+      /* Wipe the new theme in as a circle growing out of the button. */
+      if (reduceMotion || !document.startViewTransition) { apply(); return; }
+      var r = toggle.getBoundingClientRect();
+      var x = r.left + r.width / 2, y = r.top + r.height / 2;
+      var end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      document.startViewTransition(apply).ready.then(function () {
+        document.documentElement.animate(
+          { clipPath: ['circle(0 at ' + x + 'px ' + y + 'px)', 'circle(' + end + 'px at ' + x + 'px ' + y + 'px)'] },
+          { duration: 650, easing: 'cubic-bezier(.65, 0, .35, 1)', pseudoElement: '::view-transition-new(root)' }
+        );
+      });
     });
   }
 

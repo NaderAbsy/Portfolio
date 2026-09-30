@@ -38,6 +38,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="motion.css">
 
 <script>
   (function () {
@@ -45,6 +46,9 @@
       var s = localStorage.getItem('theme');
       var d = window.matchMedia('(prefers-color-scheme: dark)').matches;
       document.documentElement.setAttribute('data-theme', s || (d ? 'dark' : 'light'));
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.setAttribute('data-motion', '');
+      }
     } catch (e) {
       document.documentElement.setAttribute('data-theme', 'light');
     }
@@ -186,11 +190,14 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
+  <div class="scroll-progress" aria-hidden="true"></div>
 </header>
 
 <main id="main">
 
   <section id="top" class="hero">
+    <div class="hero-aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
     <div class="wrap hero-inner">
       <div class="hero-photo reveal">
         <img src="./assets/profile.jpg" width="640" height="640"
@@ -231,6 +238,17 @@
       </div>
     </div>
   </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Product Ownership</span><span>Business Analysis</span><span>User Acceptance Testing</span>
+      <span>Requirements</span><span>Agile / Scrum</span><span>Root Cause Analysis</span>
+      <span>SQL &amp; Data</span><span>WCAG 2.1 AA</span><span>IEEE Conferences</span><span>AI Research</span>
+      <span>Product Ownership</span><span>Business Analysis</span><span>User Acceptance Testing</span>
+      <span>Requirements</span><span>Agile / Scrum</span><span>Root Cause Analysis</span>
+      <span>SQL &amp; Data</span><span>WCAG 2.1 AA</span><span>IEEE Conferences</span><span>AI Research</span>
+    </div>
+  </div>
 
   <section id="about" class="section">
     <div class="wrap">
@@ -555,6 +573,7 @@
   </div>
 </footer>
 
+<script src="motion.js" defer></script>
 <script src="script.js" defer></script>
 </body>
 </html>
