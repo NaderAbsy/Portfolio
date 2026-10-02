@@ -362,6 +362,7 @@ a:hover { text-decoration: underline; text-underline-offset: .25em; }
   .site-header, .socials, .btn-row, .site-footer nav { display: none; }
   body { color: #000; background: #fff; }
   .reveal { opacity: 1; transform: none; }
+  .hero { min-height: 0; padding-bottom: 1rem; }
 }
 
 /* ---------- role portfolio line ---------- */
