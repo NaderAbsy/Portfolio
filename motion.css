@@ -5,11 +5,15 @@
    plain static site.
    ============================================================ */
 
+/* second and third brand colours: navy and gold (the favicon's pair), brightened enough to read on the page */
+:root { --navy: #1e3a8a; --gold: #e6b94c; --gold-text: #a87608; }
+[data-theme="dark"] { --navy: #3b5bdb; --gold-text: #e6b94c; }
+
 /* ---------- scroll progress ---------- */
 
 .scroll-progress {
   position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
-  background: linear-gradient(90deg, var(--accent), #a970ff, #ff6fb5);
+  background: linear-gradient(90deg, var(--accent), var(--navy), var(--gold));
   transform: scaleX(0); transform-origin: left; pointer-events: none;
 }
 html:not([data-motion]) .scroll-progress { display: none; }
@@ -31,10 +35,10 @@ html:not([data-motion]) .scroll-progress { display: none; }
   filter: blur(70px); opacity: .28; will-change: transform;
 }
 .hero-aurora span:nth-child(1) { background: var(--accent); top: 5%; left: 55%; animation: drift-a 22s ease-in-out infinite alternate; }
-.hero-aurora span:nth-child(2) { background: #a970ff; top: 35%; left: 10%; animation: drift-b 28s ease-in-out infinite alternate; }
-.hero-aurora span:nth-child(3) { background: #ff6fb5; top: 55%; left: 60%; opacity: .16; animation: drift-c 25s ease-in-out infinite alternate; }
+.hero-aurora span:nth-child(2) { background: var(--navy); top: 35%; left: 10%; animation: drift-b 28s ease-in-out infinite alternate; }
+.hero-aurora span:nth-child(3) { background: var(--gold); top: 55%; left: 60%; opacity: .28; animation: drift-c 25s ease-in-out infinite alternate; }
 [data-theme="dark"] .hero-aurora span { opacity: .22; }
-[data-theme="dark"] .hero-aurora span:nth-child(3) { opacity: .12; }
+[data-theme="dark"] .hero-aurora span:nth-child(3) { opacity: .2; }
 
 @keyframes drift-a { to { transform: translate(-18vmax, 12vmax) scale(1.2); } }
 @keyframes drift-b { to { transform: translate(20vmax, -10vmax) scale(.85); } }
@@ -75,7 +79,7 @@ html:not([data-motion]) .scroll-progress { display: none; }
 }
 
 [data-motion] .hero .accent {
-  background: linear-gradient(90deg, var(--accent), #a970ff, #ff6fb5, var(--accent));
+  background: linear-gradient(90deg, var(--accent), var(--navy), var(--gold-text), var(--accent));
   background-size: 300% 100%;
   -webkit-background-clip: text; background-clip: text; color: transparent;
   animation: flow 5s linear infinite;
@@ -132,7 +136,7 @@ html:not([data-motion]) .scroll-progress { display: none; }
 [data-motion] .timeline-progress {
   display: block; position: absolute; left: .42rem; top: .6rem; width: 2px;
   height: calc(100% - 1.2rem); transform-origin: top; transform: scaleY(var(--tl, 0));
-  background: linear-gradient(var(--accent), #a970ff);
+  background: linear-gradient(var(--accent), var(--gold));
   box-shadow: 0 0 12px var(--accent);
 }
 [data-motion] .timeline-item::before { transition: background-color .4s ease, box-shadow .4s ease, transform .4s cubic-bezier(.2, .9, .3, 1.6); }
